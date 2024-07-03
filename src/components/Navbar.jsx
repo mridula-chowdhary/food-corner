@@ -1,5 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { MdOutlineShoppingCart } from "react-icons/md";
+
 function Navbar() {
   return (
     <div className='text-white bg-black opacity-0.25'>
@@ -13,29 +15,29 @@ function Navbar() {
           <div className='flex justify-end'>
             <ul className='flex'>
               <li className='mr-6'>
-                <a href='/' className='text-white hover:text-gray-300'>
+                <Link to ='/' className='text-white hover:text-gray-300'>
                   Home
-                </a>
+                </Link>
               </li>
               <li className='mr-6'>
-                <a href='/' className='text-white hover:text-gray-300'>
+                <Link to ='/menus'  className='text-white hover:text-gray-300'>
                   Menu
-                </a>
+                </Link>
               </li>
               <li className='mr-6'>
-                <a href='/' className='text-white hover:text-gray-300'>
+                <Link to ='/contactus'  className='text-white hover:text-gray-300'>
                   Contact us
-                </a>
+                </Link>
               </li>
               <li className='mr-6'>
-                <a href='/' className='text-white hover:text-gray-300'>
-               <div className='flex justify-center items-center'> Cart <MdOutlineShoppingCart/></div> 
-                </a>
+                <Link to ='/cart' className='text-white hover:text-gray-300 '>
+               <div className='flex justify-center items-center'> Cart <MdOutlineShoppingCart /></div> 
+                </Link>
               </li>
               <li>
-                <a href='/' className='text-white hover:text-gray-300'>
+                <Link to ='/login'  className='text-white hover:text-gray-300'>
                   Login
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
