@@ -1,8 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 function Navbar() {
+  const cartItems = useSelector(state => state.cart.cart);
+  const cartItemCount = cartItems.reduce((total, item) => total + item.qty, 0);
   return (
     <div className='text-white bg-black opacity-0.25'>
       <div className='container mx-auto px-4'>
@@ -31,7 +34,8 @@ function Navbar() {
               </li>
               <li className='mr-6'>
                 <Link to ='/cart' className='text-white hover:text-gray-300 '>
-               <div className='flex justify-center items-center'> Cart <MdOutlineShoppingCart /></div> 
+               <div className='flex justify-center items-center'> Cart <MdOutlineShoppingCart />
+               {cartItemCount > 0 && <span className="bg-red-500 text-white px-2 rounded-full ml-1">{cartItemCount}</span>}</div> 
                 </Link>
               </li>
               <li>
