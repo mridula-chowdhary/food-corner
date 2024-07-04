@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { CiHeart } from "react-icons/ci";
 import { FcLike } from "react-icons/fc";
-import { Link } from 'react-router-dom/dist';
-import Cart from './Cart';
+// import { Link } from 'react-router-dom/dist';
+// import Cart from './Cart';
 
 
 
@@ -35,7 +35,7 @@ function Menus() {
   return (
     <div className="flex flex-wrap justify-center">
       {jsonData.items.map(item => (
-        <div key={item.id} className="m-4">
+        <div key={item.id} className="m-4 cursor-pointer transition-transform transform hover:scale-110">
           <img src={item.imageUrl} alt={item.name} className="w-48 h-48 object-cover" />
           <p className="text-center">Price = {item.price}</p>
           <div className='flex justify-between'>
@@ -45,9 +45,7 @@ function Menus() {
               <CiHeart onClick={() => handleLike(item.id)} style={{ cursor: 'pointer' }}   size={24}/>
             )}
             <div className=' cursor-pointer'>
-              <Link to = '/cart'> 
-             <Cart/>
-             </Link>
+             <button className=' bg-green-400 rounded-lg p-1 font-semibold'>Add to Cart</button>
             </div>
           </div>
         </div>
