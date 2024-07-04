@@ -4,6 +4,7 @@ import { addToCart } from '../Slices/CartSlice';
 import { CiHeart } from 'react-icons/ci';
 import { FcLike } from 'react-icons/fc';
 import JsonData from '../data/JsonData'; 
+import toast from 'react-hot-toast';
 
 function Menus() {
   const [liked, setLiked] = useState({});
@@ -17,7 +18,9 @@ function Menus() {
   };
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart({ ...item, qty: 1 }));
+    dispatch(addToCart({ ...item, qty: 1 }))
+    alert(`${item.name} added to cart!`)
+    toast.success(`${item.name} added to cart!`)
   };
 
   return (

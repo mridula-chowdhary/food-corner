@@ -9,7 +9,7 @@ import {
 } from "../Slices/CartSlice";
 import { toast } from "react-hot-toast";
 
-const ItemCard = ({ id, name, qty, price, img }) => {
+const ItemCard = ({ id, name, qty, price, img}) => {
 
   const dispatch = useDispatch();
 
