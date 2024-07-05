@@ -17,7 +17,7 @@ function CategoryMenu() {
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state) => state.category.category);
   return (
-    <div className="m-6">
+    <div className="m-6 ">
       <h2 className="text-xl font-semibold flex justify-center">Find the best food</h2>
       <div className="my-5 flex gap-3 justify-center ">
         <button

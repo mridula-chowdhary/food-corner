@@ -33,10 +33,10 @@ function Menus() {
     <>
     <div className="flex flex-wrap justify-center">
       {filteredItems.map(item => (
-        <div key={item.id} className="m-4 cursor-pointer transition-transform transform hover:scale-110">
-          <img src={item.img} alt={item.name} className="w-48 h-48 object-cover" />
-          <p className="text-center">{item.name}</p>
-          <p className="text-center">Price = ₹{item.price}</p>
+        <div key={item.id} className="m-4 p-3 cursor-pointer transition-transform transform hover:scale-110 shadow-xl rounded-lg">
+          <img src={item.img} alt={item.name} className="w-56 h-48 object-cover" />
+          <p className="text-center p-2">{item.name}</p>
+          <p className="text-center  p-2">Price : ₹{item.price}</p>
           <div className='flex justify-between'>
             {liked[item.id] ? (
               <FcLike onClick={() => handleLike(item.id)} style={{ cursor: 'pointer' }} size={24} />
@@ -45,7 +45,7 @@ function Menus() {
             )}
             <div className='cursor-pointer'>
               <button
-                className='bg-green-400 rounded-lg p-1 font-semibold'
+                className='bg-green-400 rounded-lg p-1 font-semibold '
                 onClick={() => handleAddToCart(item)}
               >
                 Add to Cart
