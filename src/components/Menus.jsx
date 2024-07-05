@@ -5,7 +5,6 @@ import { CiHeart } from 'react-icons/ci';
 import { FcLike } from 'react-icons/fc';
 import JsonData from '../data/JsonData'; 
 import toast from 'react-hot-toast';
-import Navbar from './Navbar';
 
 function Menus() {
   const [liked, setLiked] = useState({});

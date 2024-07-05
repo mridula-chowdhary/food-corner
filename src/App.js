@@ -4,8 +4,7 @@ import Home from './pages/Home';
 import Cart from './components/Cart';
 import Menus from './components/Menus';
 import Success from './pages/Success';
-import Navbar from './components/Navbar';
-// import Checkout from './components/Checkout';
+
 
 function App() {
   return (
