@@ -38,11 +38,7 @@ function Navbar() {
                {cartItemCount > 0 && <span className="bg-red-500 text-white px-2 rounded-full ml-1">{cartItemCount}</span>}</div> 
                 </Link>
               </li>
-              <li>
-                <Link to ='/login'  className='text-white hover:text-gray-300'>
-                  Login
-                </Link>
-              </li>
+             
             </ul>
           </div>
         </nav>

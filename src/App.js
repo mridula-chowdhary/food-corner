@@ -4,13 +4,14 @@ import Home from './pages/Home';
 import Cart from './components/Cart';
 import Menus from './components/Menus';
 import Success from './pages/Success';
+import Navbar from './components/Navbar';
 // import Checkout from './components/Checkout';
 
 function App() {
   return (
+    <>
     <div className="App">
     <BrowserRouter>
-   
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/cart' element={<Cart/>}/>
@@ -20,6 +21,7 @@ function App() {
     </Routes>
     </BrowserRouter>
     </div>
+    </>
   );
 }
 

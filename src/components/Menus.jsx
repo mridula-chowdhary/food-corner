@@ -5,11 +5,13 @@ import { CiHeart } from 'react-icons/ci';
 import { FcLike } from 'react-icons/fc';
 import JsonData from '../data/JsonData'; 
 import toast from 'react-hot-toast';
+import Navbar from './Navbar';
 
 function Menus() {
   const [liked, setLiked] = useState({});
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state) => state.category.category);
+  const searchQuery = useSelector((state) => state.search.search);
 
   const handleLike = (itemId) => {
     setLiked(prevLikedItems => ({
@@ -19,15 +21,17 @@ function Menus() {
   };
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart({ ...item, qty: 1 }))
+    dispatch(addToCart({ ...item, qty: 1 }));
     toast.success(`${item.name} added to cart!`);
   };
 
-  const filteredItems = selectedCategory === 'All'
-    ? JsonData
-    : JsonData.filter(item => item.category === selectedCategory);
+  const filteredItems = JsonData.filter(item => 
+    (selectedCategory === 'All' || item.category === selectedCategory) &&
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
+    <>
     <div className="flex flex-wrap justify-center">
       {filteredItems.map(item => (
         <div key={item.id} className="m-4 cursor-pointer transition-transform transform hover:scale-110">
@@ -52,6 +56,7 @@ function Menus() {
         </div>
       ))}
     </div>
+    </>
   );
 }
 
