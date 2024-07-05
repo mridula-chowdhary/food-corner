@@ -1,19 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import JsonData from '../data/JsonData';
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../Slices/CategorySlice";
 
 function CategoryMenu() {
+  const [categories, setCategories] = useState([]);
+
+  const listUniqueCategories = () => {
+    const uniqueList = [...new Set(JsonData.map((item) => item.category))];
+    setCategories(uniqueList);
+  };
+
+  useEffect(() => {
+    listUniqueCategories();
+  }, []);
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector((state) => state.category.category);
   return (
-    <div className='text-center m-6'>
-      <h2 className='p-6 text-2xl font-medium'> Find the best Food</h2>
-      <div className='flex justify-center gap-6 '> 
-        <button className='px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white'> All</button>
-        <button className='px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white'>Lunch</button>
-        <button className='px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white'>breakfast</button>
-        <button className='px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white'>Dinner</button>
-        <button className='px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white'>Snacks</button>
+    <div className="m-6">
+      <h2 className="text-xl font-semibold flex justify-center">Find the best food</h2>
+      <div className="my-5 flex gap-3 justify-center ">
+        <button
+          onClick={() => dispatch(setCategory("All"))}
+          className={`px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white ${
+            selectedCategory === "All" && "bg-green-500 text-white"
+          }`}
+        >
+          All
+        </button>
+        {categories.map((category, index) => {
+          return (
+            <button
+              onClick={() => dispatch(setCategory(category))}
+              key={index}
+              className={`px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white ${
+                selectedCategory === category && "bg-green-500 text-white"
+              } `}
+            >
+              {category}
+            </button>
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }
 
 export default CategoryMenu;
-

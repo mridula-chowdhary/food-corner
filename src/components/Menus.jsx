@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../Slices/CartSlice';
 import { CiHeart } from 'react-icons/ci';
 import { FcLike } from 'react-icons/fc';
@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 function Menus() {
   const [liked, setLiked] = useState({});
   const dispatch = useDispatch();
+  const selectedCategory = useSelector((state) => state.category.category);
 
   const handleLike = (itemId) => {
     setLiked(prevLikedItems => ({
@@ -19,13 +20,16 @@ function Menus() {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart({ ...item, qty: 1 }))
-    alert(`${item.name} added to cart!`)
-    toast.success(`${item.name} added to cart!`)
+    toast.success(`${item.name} added to cart!`);
   };
+
+  const filteredItems = selectedCategory === 'All'
+    ? JsonData
+    : JsonData.filter(item => item.category === selectedCategory);
 
   return (
     <div className="flex flex-wrap justify-center">
-      {JsonData.map(item => (
+      {filteredItems.map(item => (
         <div key={item.id} className="m-4 cursor-pointer transition-transform transform hover:scale-110">
           <img src={item.img} alt={item.name} className="w-48 h-48 object-cover" />
           <p className="text-center">{item.name}</p>
