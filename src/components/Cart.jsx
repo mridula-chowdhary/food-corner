@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { IoMdClose } from 'react-icons/io';
 import ItemCard from './ItemCard';
 import {useDispatch, useSelector } from 'react-redux';
@@ -15,11 +15,19 @@ const Cart = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const handleCheckout = () => {
+    // if (totalQty === 0) {
+    //   toast.error('Cart is empty. Cannot proceed to checkout.');
+    //   return;
+    // }
     dispatch(resetCart()); 
     toast.success('Checkout successful! Cart has been emptied.');
     navigate('/success')
   };
-
+  useEffect(() => {
+    if (totalQty === 0) {
+      navigate('/emptyCart'); 
+    }
+  }, [totalQty, navigate]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-8">

@@ -1,6 +1,7 @@
 import { Suspense,lazy } from 'react';
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
 import './App.css';
+import EmptyCart from './components/EmptyCart';
 const Home = lazy(() => import('./pages/Home'));
 const Cart = lazy(() => import('./components/Cart'));
 const Menus = lazy(() => import('./components/Menus'));
@@ -18,6 +19,7 @@ function App() {
       <Route path='/cart' element={<Cart/>}/>
       <Route path= '/menus' element={<Menus/>}/>
        <Route path='/success' element={<Success/>}/>  
+       <Route path = '/emptyCart' element={<EmptyCart/>}/>
     </Routes>
     </Suspense>
     </BrowserRouter>
