@@ -54,6 +54,11 @@ function Navbar() {
                   </div>
                 </button>
               </li>
+              <li className='mr-6'>
+                <Link to='/signup' className='text-white hover:text-gray-300'>
+                  Sign Up
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
