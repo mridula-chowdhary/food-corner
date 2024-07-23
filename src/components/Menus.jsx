@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../Slices/CartSlice';
+import { addToCart } from '../redux/Slices/CartSlice';
 import { CiHeart } from 'react-icons/ci';
 import { FcLike } from 'react-icons/fc';
 import JsonData from '../data/JsonData'; 

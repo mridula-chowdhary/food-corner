@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {login} from '../redux/Slices/AuthSlice';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +15,9 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+ const dispatch = useDispatch();
+const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,12 +36,10 @@ const Login = () => {
 
       const data = await response.json();
 
-      if (response.ok) {
-        if (data.userFound) {
-          alert('Login successful');
-        } else {
-          alert('User not found');
-        }
+      if (response.ok && data.userFound) {
+        dispatch(login({ email: formData.email }));
+        alert('Login successful');
+        navigate('/'); 
       } else {
         alert(data.message || 'Login failed');
       }

@@ -6,7 +6,7 @@ import {
   removeFromCart,
   incrementQty,
   decrementQty,
-} from "../Slices/CartSlice";
+} from "../redux/Slices/CartSlice";
 import { toast } from "react-hot-toast";
 
 const ItemCard = ({ id, name, qty, price, img}) => {

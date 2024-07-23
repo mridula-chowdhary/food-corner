@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JsonData from '../data/JsonData';
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../Slices/CategorySlice";
+import { setCategory } from "../redux/Slices/CategorySlice";
 
 function CategoryMenu() {
   const [categories, setCategories] = useState([]);

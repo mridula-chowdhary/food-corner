@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setSearch } from '../Slices/SearchSlice'
+import { setSearch } from '../redux/Slices/SearchSlice'
 
 function Banner() {
   const dispatch = useDispatch();

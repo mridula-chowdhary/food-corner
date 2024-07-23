@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { IoMdClose } from 'react-icons/io';
 import ItemCard from './ItemCard';
 import {useDispatch, useSelector } from 'react-redux';
-import { resetCart } from '../Slices/CartSlice';
+import { resetCart } from '../redux/Slices/CartSlice';
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-hot-toast';
 
