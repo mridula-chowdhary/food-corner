@@ -5,6 +5,7 @@ import EmptyCart from './components/EmptyCart';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import Profile from './components/Profile';
 
 
 const Home = lazy(() => import('./pages/Home'));
@@ -26,6 +27,7 @@ function App() {
               <Route path='/emptyCart' element={<EmptyCart />} />
               <Route path='/signup' element={<Signup />} />
               <Route path='/login' element={<Login />} />
+              <Route path ='/profile' element={<Profile/>}/>
             </Routes>
           </Suspense>
         </BrowserRouter>

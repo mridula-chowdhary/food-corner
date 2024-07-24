@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useSelector,useDispatch } from 'react-redux';
 import {logout} from '../redux/Slices/AuthSlice'
+// import { clearCart } from '../redux/Slices/CartSlice';
 
 function Navbar() {
   const cartItems = useSelector(state => state.cart.cart);
@@ -17,7 +18,14 @@ const{isAuthenticated,user} = useSelector(state=>state.auth);
       navigate('/emptyCart');
     }
   };
+  const handleLogout = () => {
 
+    localStorage.removeItem('token');
+    window.location.reload();
+    dispatch(logout()); 
+    navigate('/');
+   
+  };
   return (
     <div className='text-white bg-black opacity-0.25'>
       <div className='container mx-auto px-4  items-center'>
@@ -64,7 +72,7 @@ const{isAuthenticated,user} = useSelector(state=>state.auth);
                     </span>
                  </li>
                  <li className='mr-6'>
-                  <button onClick={()=>dispatch(logout())}  className='text-white hover:text-gray-300' >Logout</button>
+                  <button onClick={handleLogout}  className='text-white hover:text-gray-300' >Logout</button>
                  </li>
                   </>
               ) : (

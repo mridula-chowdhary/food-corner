@@ -2,9 +2,10 @@ import React,{useEffect} from 'react';
 import { IoMdClose } from 'react-icons/io';
 import ItemCard from './ItemCard';
 import {useDispatch, useSelector } from 'react-redux';
-import { resetCart } from '../redux/Slices/CartSlice';
+// import { resetCart } from '../redux/Slices/CartSlice';
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-hot-toast';
+import { clearCart } from '../redux/Slices/CartSlice';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -15,11 +16,7 @@ const Cart = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const handleCheckout = () => {
-    // if (totalQty === 0) {
-    //   toast.error('Cart is empty. Cannot proceed to checkout.');
-    //   return;
-    // }
-    dispatch(resetCart()); 
+    dispatch(clearCart()); 
     toast.success('Checkout successful! Cart has been emptied.');
     navigate('/success')
   };

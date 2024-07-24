@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {login} from '../redux/Slices/AuthSlice';
+import { login } from '../redux/Slices/AuthSlice';
 import { useNavigate } from 'react-router-dom';
-
-
+import { setCart } from '../redux/Slices/CartSlice';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
- const dispatch = useDispatch();
-const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,13 +28,25 @@ const navigate = useNavigate();
           password: formData.password
         })
       });
-
+  
       const data = await response.json();
-
       if (response.ok && data.userFound) {
         dispatch(login({ email: formData.email }));
-        alert('Login successful');
-        navigate('/'); 
+        localStorage.setItem('token', data.token);
+        console.log('Token:', data.token);
+  
+        // Fetch and set cart data
+        const cartResponse = await fetch('http://localhost:5000/api/users/cart', {
+          headers: {
+            'Authorization': `Bearer ${data.token}`
+          }
+        });
+        const cartData = await cartResponse.json();
+        if (cartResponse.ok) {
+          dispatch(setCart(cartData.cart)); 
+        }
+  
+        navigate('/');
       } else {
         alert(data.message || 'Login failed');
       }
@@ -48,7 +55,7 @@ const navigate = useNavigate();
       alert('An error occurred while logging in');
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded shadow-md">
