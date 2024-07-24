@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useSelector,useDispatch } from 'react-redux';
-import {logout} from '../redux/Slices/AuthSlice'
-// import { clearCart } from '../redux/Slices/CartSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/Slices/AuthSlice';
+import { clearCart } from '../redux/Slices/CartSlice';
 
 function Navbar() {
   const cartItems = useSelector(state => state.cart.cart);
   const cartItemCount = cartItems.reduce((total, item) => total + item.qty, 0);
   const navigate = useNavigate();
-const dispatch= useDispatch();
-const{isAuthenticated,user} = useSelector(state=>state.auth);
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector(state => state.auth);
+
   const handleCartClick = () => {
     if (cartItemCount > 0) {
       navigate('/cart');
@@ -18,17 +19,18 @@ const{isAuthenticated,user} = useSelector(state=>state.auth);
       navigate('/emptyCart');
     }
   };
-  const handleLogout = () => {
 
+  const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.reload();
-    dispatch(logout()); 
+    localStorage.removeItem('cart'); // Clear cart from localStorage
+    dispatch(logout());
+    dispatch(clearCart()); // Clear cart from Redux store
     navigate('/');
-   
   };
+
   return (
     <div className='text-white bg-black opacity-0.25'>
-      <div className='container mx-auto px-4  items-center'>
+      <div className='container mx-auto px-4 items-center'>
         <nav className='flex items-center justify-between h-16'>
           <div className='flex-shrink-0'>
             <Link to='/' className='text-white text-lg font-semibold'>
@@ -63,18 +65,20 @@ const{isAuthenticated,user} = useSelector(state=>state.auth);
                     )}
                   </div>
                 </button>
-              </li> 
-              {isAuthenticated? (
-                 <>
-                 <li className='mr-6'>
-                 <span className='text-white hover:text-gray-300'>
+              </li>
+              {isAuthenticated && user ? (
+                <>
+                  <li className='mr-6'>
+                    <span className='text-white hover:text-gray-300'>
                       {user.email}
                     </span>
-                 </li>
-                 <li className='mr-6'>
-                  <button onClick={handleLogout}  className='text-white hover:text-gray-300' >Logout</button>
-                 </li>
-                  </>
+                  </li>
+                  <li className='mr-6'>
+                    <button onClick={handleLogout} className='text-white hover:text-gray-300'>
+                      Logout
+                    </button>
+                  </li>
+                </>
               ) : (
                 <>
                   <li className='mr-6'>
@@ -88,8 +92,7 @@ const{isAuthenticated,user} = useSelector(state=>state.auth);
                     </Link>
                   </li>
                 </>
-              ) 
-              }
+              )}
             </ul>
           </div>
         </nav>

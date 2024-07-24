@@ -33,7 +33,7 @@ const Login = () => {
       if (response.ok && data.userFound) {
         dispatch(login({ email: formData.email }));
         localStorage.setItem('token', data.token);
-        console.log('Token:', data.token);
+        localStorage.setItem('user', JSON.stringify({ email: formData.email }));
   
         // Fetch and set cart data
         const cartResponse = await fetch('http://localhost:5000/api/users/cart', {
@@ -43,7 +43,7 @@ const Login = () => {
         });
         const cartData = await cartResponse.json();
         if (cartResponse.ok) {
-          dispatch(setCart(cartData.cart)); 
+          dispatch(setCart(cartData.cart)); // Set cart data in Redux store
         }
   
         navigate('/');
